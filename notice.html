@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="x5-orientation" content="portrait">
+    <title>日冠称号等你拿</title>
+    <style type="text/css">
+        body {
+            margin: 0;
+            background-color: #F9BE02;
+        }
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<img src="http://a.xnimg.cn/wap/mobile/Stardust/img/riguanwang.jpg">
+<script>
+    window.onresize = r;
+    function r(resizeNum){
+        //核心适配代码
+        var winW = window.innerWidth;
+        document.getElementsByTagName("html")[0].style.fontSize=winW*0.15625+"px";
+        //核心适配代码
+        if(winW>window.screen.width&&resizeNum<=10){
+            setTimeout(function(){
+                r(++resizeNum)
+            }, 100);
+        }
+        else{
+            document.getElementsByTagName("body")[0].style.opacity = 1;
+        }
+    }
+    setTimeout(function(){r(0)}, 100);
+</script>
+</body>
+</html>
+
+<link rel="stylesheet" href="">
