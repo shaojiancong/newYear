@@ -19,7 +19,7 @@
         $midpage_mob_common.baiduTongJi_feed$    
     </script>
     <!-- DEBUG -->
-
+    <script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
     <style type="text/css">
         $TemplateEngine.baseCss$
     </style>
@@ -65,6 +65,89 @@ input:focus{outline-offset:-2px;}
             padding: 14px 0;
             display: block;
         }
+.tab-interest-content {
+    margin: 0px 0px 0px;
+    -moz-box-shadow: 0px 1px 2px #b5b5b5;
+    -webkit-box-shadow: 0px 1px 2px #b5b5b5;
+    box-shadow: 0px 1px 2px #b5b5b5;
+    background-color: #ffffff;
+    display: inline-block;
+    border-radius: 4px;
+    width: 100%;
+}
+.tab-interest-content .interest {
+    padding: 13px 8px 17px;
+    background-color: #fff;
+    width: auto;
+    color: #333;
+    font: 12px Arial,Helvetica,sans-serif;
+    word-break: break-word;
+    word-wrap: break-word;
+    border: 0 none;
+    border-radius: 4px;
+    position: relative;
+}
+.tab-interest-content .interest-recommend-tag {
+    border: none;
+    border-top: 0px solid #f0f0f0;
+    margin: 0 0px;
+    padding-bottom: 7px;
+    padding-left: 3px;
+    display: block;
+    overflow:hidden;
+}
+.tab-interest-content .interest-recommend-tag span {
+    float: left;
+    text-align: left;
+    font-size: 13px;
+    color: #999;
+    display: inline-block;
+}
+.tab-interest-content .interest .interest-recommend {
+    font-size: 13px;
+    display: flex;
+}
+.tab-interest-content .interest .interest-recommend .interest-src-net {
+    background: #F8F8F8;
+    margin: 6px 3px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: center;
+    flex: 1;
+    border-radius: 3px;
+}
+.tab-interest-content .interest a {
+    text-align: center;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    white-space: nowrap;
+    display: block;
+    color:#333;
+}
+.tab-interest-content .interest a.red{
+    text-align: center;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    white-space: nowrap;
+    display: block;
+    color:#D00000;
+}
+
+/*.interest .interest-recommend:nth-child(2) a{
+    color:#D00000;
+}*/
+
 #tab-asp-content .news-list-wrapper div:first-child a.inner-item {
     border: none;
 }
@@ -91,9 +174,6 @@ input:focus{outline-offset:-2px;}
         }
         .tab-news-content .tpl-2 .info-content > div {
             margin-left: 14px;
-        }
-        .tab-news-content .pic-content {
-            text-align: center;
         }
         .tab-news-content .tpl-2 .pic-content {
             width: 33.65%;
@@ -262,7 +342,7 @@ input:focus{outline-offset:-2px;}
             width: 100%;
             max-width: 100%;
             min-width: 100%;
-            max-height: 640px;
+            max-height: 160px;
         }
         .slow_aa_iphone{
             width: 13px  !important;
@@ -276,44 +356,30 @@ input:focus{outline-offset:-2px;}
             bottom:14px;
             font-size:13px;
         }
-    .tab-news-content .news-item .down_load_desc_href{
-        flex:4;margin: 8px 0px 0px 0px;padding: 0px;
-    }
-    .tab-news-content .news-item .down_load_desc{
-        text-overflow:ellipsis;
-        line-height: 40px;
-        font-size: 16px;
-        color: #333;
-        height: 40px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 1;
-        -webkit-box-orient:
-        vertical;
-    }
-    .tab-news-content .news-item .down_load_button_href{
-        flex:1;
-        margin: 12px 0px 0px 0px;
-        padding: 0px;
-    }
-    .tab-news-content .news-item .down_load_button{
-        text-align: center;
-        text-overflow: ellipsis;
-        color: #3c76ff;
-        height: 26px;
-        line-height: 27px;
-        font-size: 13px;
-        border: 1px solid #3c76ff;
-        border-radius: 2px;
-    }
     </style>
+    <script type="text/template" id="interest-list_template">
+        <div class="interest">
+            <div class="interest-recommend-tag">
+                <span>相关推荐</span>
+            </div>
+            <%for(var i in ads){%>
+            <div class="interest-recommend">
+                <div class="interest-src-net" data-num = <%=ads[i].num1%> data-word = <%=ads[i].key1%>>
+                    <a href=<%=ads[i].curl1%> data-num = <%=ads[i].num1%> data-word = <%=ads[i].key1%> target="_blank"> <%=ads[i].key1%> </a>
+                </div>
+                <div class="interest-src-net" data-num = <%=ads[i].num2%> data-word = <%=ads[i].key2%>>
+                    <a href=<%=ads[i].curl2%> data-num = <%=ads[i].num2%> data-word = <%=ads[i].key2%> target="_blank"> <%=ads[i].key2%> </a>
+                </div>
+            </div>
+            <%}%>
+        </div>
+    </script>
     <script type="text/template" id="news-list_template">
         <%for(var i in ads){%>
         <%if (ads[i].type == 2){%>
         <div id="<%=ads[i].id%>" onclick="ThisPage.clickLog(this,<%=ads[i].stype%>)" style="position: relative;" class="news-item tpl-2" <%if(ads[i].extra_param){%>extra_param="<%=ads[i].extra_param%>"<%}%>>
         <a href="<%=ads[i].curl%>" class="inner-item clr" target="_blank"
-           onclick="<%=ads[i].onclick%>'<%=ads[i].id%>');">
+           onclick="<%=ads[i].onclick%>">
             <div class="inner-item-pic-info">
                 <div class="info-content">
                     <div class="text-content">
@@ -351,7 +417,7 @@ input:focus{outline-offset:-2px;}
         <%if (ads[i].tag_list || ads[i].phone_link || ads[i].aa_link){%>
         <%if (ads[i].phone_link) {%>
         <span class="aa-link-slow">
-                <a href="javascript:;" style="padding:0px;margin:0px;" class="aa-item" data-cal="tel:<%=ads[i].phone_num%>" data-rcv="<%=ads[i].phone_link%>" onclick="<%=ads[i].onclick%>'<%=ads[i].id%>');">
+                <a href="javascript:;" style="padding:0px;margin:0px;" class="aa-item" data-cal="tel:<%=ads[i].phone_num%>" data-rcv="<%=ads[i].phone_link%>" onclick="<%=ads[i].onclick%>">
                     <img class="slow_aa_iphone" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAPASURBVGhD7ZlXiFRJFIbHsEZWMWJasygm0BdFDIv6IoLgIuKbIIqIiuCDIiK+6YugKJhF0TUgrOlhXTHgqogPigETRswR45p11+9rpqCZvd3Ts9vdUwPzw4feuqfvPTVVdc6puiXVquKqUfpvlZTOT4Kr8DechT5QpfQj7IR/ynAfmkCVUCvwr6/jL2Ac1IOjpW0bIXp1gdugw5egMwR57y/w3mgbYlU7uAU6egySptB08P4DiHKKNYILoJOHoT4kyQAQ9RRbAzpnZxrbkEXpU2yUDTHpIxhicw2vs8CO3AUjXDT6BjpmdMpFNeE4+JvVNsSisMi7pa5yU3f4AI7kcBti0G6wIxNSV7lrDvi7A6mrCBTCakUj0WDwd+dTVxGoE7hO3kJFFu9ysCNrU1eRyOmhU9NSV+WrK3yCr9DLhlj0C9iRG/CDDeVoF2gfVdRShtRzoHMzbMiiYaDda2hpQ2wyU+vgY8i0VuzwadBurg2x6gjo5MrU1b/VBswf2oy1IVb1gPdgohthQ4Jmgh15Dj/ZEKtmg47egaQpZhW8D7Q5BQ0gStWCUEtttSFBVsmh9N8L/iZKmSdegY46QknqAE9Bmw0Q7WmLW1ozvklvpA0J6g+hwysg2s4sAJ18Bul7+HQNgneg3RIbYpR/4d9AJ10TzSFJjpgli3ZLIcqRMXKFhW2UypQsTaiGbu0sXaLsTAu4DjrpAUWm3eTP8Aa02wJ1IJusvIdCw9RVkWTyuwc6acitDUkaAB7uaXcIkg40BsKfoI1o7xFt0UbRLW4IueaYTPnDgwwTqnZXoDeo9rANrBy8Z5C4WPp/+QO0KYr6QQi5OyDT9PH41TUVHN4EYQ25iZsPoSrwaPYJeM+qegoUZXScGmH6/A6ZyhTX0irQTsxLJs/WUFZGxO0QbA9CRyi4nD6PwJd6zJrtcM9KeQ84muVJW7cSPtfA4a614KNjKRMOvs9AvjZaTeFXCKPj9sIIV1B5AH4ZfOFN6Av50hh4CD7bIFPwzji/T4IvdCGPh3zJk//94LMX2VBo1YV14AsNr77UrXE+NA98ruVP0eTi/Ay+2Mhjuf9/5PY6BJWifwEYAuHl5oXJ8F8ijznqBPgcw3ylqBmk5wWzdk/IVXY8RC4jo5GsUuXhX8jaX2A9tIVsshPhSNbEG82ncaPaMgh7Fj8uWXM5BctOOU86N4N2ljYWodHJPOB0CcFAXEuW/AthKoT67CVY4kctI5FF4zUIHUrHyjmfibUosjCcCIvBD7PmjIp83qhWtfKrkpLvQWkC5sBXTF0AAAAASUVORK5CYII=">
                     <span style="color: #999;font-size: 13px;">电话咨询</span>
                 </a>
@@ -359,7 +425,7 @@ input:focus{outline-offset:-2px;}
             <%}%>
             <%if (ads[i].aa_link) {%>
             <div class="aa-link-slow">
-                <a href="<%=ads[i].aa_link%>" target="_blank" class="aa-item" style="padding:0px;margin:0px;  display:flex;display: -webkit-flex;align-items:center;" onclick="<%=ads[i].onclick%>'<%=ads[i].id%>');">
+                <a href="<%=ads[i].aa_link%>" target="_blank" class="aa-item" style="padding:0px;margin:0px;  display:flex;display: -webkit-flex;align-items:center;" onclick="<%=ads[i].onclick%>">
                     <img class="slow_aa_iphone"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIvSURBVGhD7ZlNaxNhFIUjrvxAUVQQFPEDRPwJQkEQ1I0rsykRTGaSSQJBgop7QdwqSlEQV4oguHFTF+JOUfQfuBCEgiDW2lr8QKvPjWeYpE1BpeIt3AcOmffeOzPnTDIMZEpBEPwZ9Xp9FD1HXxuNxg9neo9uJUmyR3aHg/mr+U5sf0eTjjSTe0PTWZYdkO1BGBxVgBlUa7fba9VyQ5qmO/F4R2EmKpXKGrUKMP/UBkiaqOSScrm8Eq/PFKaqcgHNzzTmOp3OOpXcgtfTCnJJpQI1prR0DUHy22BMpYII8h+IIN6IIN6IIN6IIN6IIN6IIN6IIN6IIN6IIN6IIN74nSAftXQNAU4sGoTipDVrtdoOldyC1wsKclGlAhp31bypkkvwtxW9ldeDKhekabqfxqwNoAesT7I+NF/VanWzdllAkiT7hu2zRDqKr3PojUKM67QLwfxhhuwdhIVZTC80PkCz2dxL78u82X8iQjziom3UqYfD4CYGz6DbbNvPrV92kFmNDkDvivpP+uaXVBz7OjrG6Vb8OutfYiE4oF2V1Sr1aLVau+jZv/nv0HqV/ZIHwfgGlfL3FQ8V8KzKfuH+2WZmMf1BpR6sLyvEYwulsl8wfEpB7tu62+2uYvuGaq/5lrb3Bj1jb1Exaw/MOXQEVdBLhXiFdmvUL5gdQRNmGn1CU9q2EPf67xfXYHg6Ny59I8A4nyMaWR5gOsP0NT7PZ1l2nAffFrWCIFg2lEo/AZiqIAQZKaOlAAAAAElFTkSuQmCC">
                     <span style="color: #999;font-size: 13px;">在线咨询</span>
 
@@ -372,7 +438,7 @@ input:focus{outline-offset:-2px;}
         </div>
         <%}else if(ads[i].type == 1) {%>
         <div id="<%=ads[i].id%>" class="news-item tpl-1" style="position: relative;" onclick="ThisPage.clickLog(this,<%=ads[i].stype%>)" <%if(ads[i].extra_param){%>extra_param="<%=ads[i].extra_param%>"<%}%>>
-        <a href="<%=ads[i].curl%>" class="inner-item" target="_blank"  onclick="<%=ads[i].onclick%>'<%=ads[i].id%>');">
+        <a href="<%=ads[i].curl%>" class="inner-item" target="_blank"  onclick="<%=ads[i].onclick%>">
             <div class="text-content"><h2><%=ads[i].tit%><span class="hotRec hotRec0"></span></h2></div>
             <div class="text-content-desc"><h2><%=ads[i].desc%><span class="hotRec hotRec0"></span></h2></div>
             <div class="news-from">
@@ -386,7 +452,7 @@ input:focus{outline-offset:-2px;}
         <%if (ads[i].tag_list || ads[i].phone_link || ads[i].aa_link){%>
         <%if (ads[i].phone_link) {%>
         <span class="aa-link-slow">
-                <a href="javascript:;" style="padding:0px;margin:0px;" class="aa-item" data-cal="tel:<%=ads[i].phone_num%>" data-rcv="<%=ads[i].phone_link%>" onclick="<%=ads[i].onclick%>'<%=ads[i].id%>');">
+                <a href="javascript:;" style="padding:0px;margin:0px;" class="aa-item" data-cal="tel:<%=ads[i].phone_num%>" data-rcv="<%=ads[i].phone_link%>" onclick="<%=ads[i].onclick%>">
                     <img class="slow_aa_iphone" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAPASURBVGhD7ZlXiFRJFIbHsEZWMWJasygm0BdFDIv6IoLgIuKbIIqIiuCDIiK+6YugKJhF0TUgrOlhXTHgqogPigETRswR45p11+9rpqCZvd3Ts9vdUwPzw4feuqfvPTVVdc6puiXVquKqUfpvlZTOT4Kr8DechT5QpfQj7IR/ynAfmkCVUCvwr6/jL2Ac1IOjpW0bIXp1gdugw5egMwR57y/w3mgbYlU7uAU6egySptB08P4DiHKKNYILoJOHoT4kyQAQ9RRbAzpnZxrbkEXpU2yUDTHpIxhicw2vs8CO3AUjXDT6BjpmdMpFNeE4+JvVNsSisMi7pa5yU3f4AI7kcBti0G6wIxNSV7lrDvi7A6mrCBTCakUj0WDwd+dTVxGoE7hO3kJFFu9ysCNrU1eRyOmhU9NSV+WrK3yCr9DLhlj0C9iRG/CDDeVoF2gfVdRShtRzoHMzbMiiYaDda2hpQ2wyU+vgY8i0VuzwadBurg2x6gjo5MrU1b/VBswf2oy1IVb1gPdgohthQ4Jmgh15Dj/ZEKtmg47egaQpZhW8D7Q5BQ0gStWCUEtttSFBVsmh9N8L/iZKmSdegY46QknqAE9Bmw0Q7WmLW1ozvklvpA0J6g+hwysg2s4sAJ18Bul7+HQNgneg3RIbYpR/4d9AJ10TzSFJjpgli3ZLIcqRMXKFhW2UypQsTaiGbu0sXaLsTAu4DjrpAUWm3eTP8Aa02wJ1IJusvIdCw9RVkWTyuwc6acitDUkaAB7uaXcIkg40BsKfoI1o7xFt0UbRLW4IueaYTPnDgwwTqnZXoDeo9rANrBy8Z5C4WPp/+QO0KYr6QQi5OyDT9PH41TUVHN4EYQ25iZsPoSrwaPYJeM+qegoUZXScGmH6/A6ZyhTX0irQTsxLJs/WUFZGxO0QbA9CRyi4nD6PwJd6zJrtcM9KeQ84muVJW7cSPtfA4a614KNjKRMOvs9AvjZaTeFXCKPj9sIIV1B5AH4ZfOFN6Av50hh4CD7bIFPwzji/T4IvdCGPh3zJk//94LMX2VBo1YV14AsNr77UrXE+NA98ruVP0eTi/Ay+2Mhjuf9/5PY6BJWifwEYAuHl5oXJ8F8ijznqBPgcw3ylqBmk5wWzdk/IVXY8RC4jo5GsUuXhX8jaX2A9tIVsshPhSNbEG82ncaPaMgh7Fj8uWXM5BctOOU86N4N2ljYWodHJPOB0CcFAXEuW/AthKoT67CVY4kctI5FF4zUIHUrHyjmfibUosjCcCIvBD7PmjIp83qhWtfKrkpLvQWkC5sBXTF0AAAAASUVORK5CYII=">
                     <span style="color: #999;font-size: 13px;">电话咨询</span>
                 </a>
@@ -394,7 +460,7 @@ input:focus{outline-offset:-2px;}
             <%}%>
             <%if (ads[i].aa_link) {%>
             <div class="aa-link-slow">
-                <a href="<%=ads[i].aa_link%>" target="_blank" class="aa-item" style="padding:0px;margin:0px;  display:flex;display: -webkit-flex;align-items:center;" onclick="<%=ads[i].onclick%>'<%=ads[i].id%>');">
+                <a href="<%=ads[i].aa_link%>" target="_blank" class="aa-item" style="padding:0px;margin:0px;  display:flex;display: -webkit-flex;align-items:center;" onclick="<%=ads[i].onclick%>">
                     <img class="slow_aa_iphone"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIvSURBVGhD7ZlNaxNhFIUjrvxAUVQQFPEDRPwJQkEQ1I0rsykRTGaSSQJBgop7QdwqSlEQV4oguHFTF+JOUfQfuBCEgiDW2lr8QKvPjWeYpE1BpeIt3AcOmffeOzPnTDIMZEpBEPwZ9Xp9FD1HXxuNxg9neo9uJUmyR3aHg/mr+U5sf0eTjjSTe0PTWZYdkO1BGBxVgBlUa7fba9VyQ5qmO/F4R2EmKpXKGrUKMP/UBkiaqOSScrm8Eq/PFKaqcgHNzzTmOp3OOpXcgtfTCnJJpQI1prR0DUHy22BMpYII8h+IIN6IIN6IIN6IIN6IIN6IIN6IIN6IIN6IIN6IIN74nSAftXQNAU4sGoTipDVrtdoOldyC1wsKclGlAhp31bypkkvwtxW9ldeDKhekabqfxqwNoAesT7I+NF/VanWzdllAkiT7hu2zRDqKr3PojUKM67QLwfxhhuwdhIVZTC80PkCz2dxL78u82X8iQjziom3UqYfD4CYGz6DbbNvPrV92kFmNDkDvivpP+uaXVBz7OjrG6Vb8OutfYiE4oF2V1Sr1aLVau+jZv/nv0HqV/ZIHwfgGlfL3FQ8V8KzKfuH+2WZmMf1BpR6sLyvEYwulsl8wfEpB7tu62+2uYvuGaq/5lrb3Bj1jb1Exaw/MOXQEVdBLhXiFdmvUL5gdQRNmGn1CU9q2EPf67xfXYHg6Ny59I8A4nyMaWR5gOsP0NT7PZ1l2nAffFrWCIFg2lEo/AZiqIAQZKaOlAAAAAElFTkSuQmCC">
                     <span style="color: #999;font-size: 13px;">在线咨询</span>
 
@@ -408,7 +474,7 @@ input:focus{outline-offset:-2px;}
         <%}else if(ads[i].type == 4) {%>
         <div id="<%=ads[i].id%>" class="news-item tpl-2" onclick="ThisPage.clickLog(this,<%=ads[i].stype%>)" <%if(ads[i].extra_param){%>extra_param="<%=ads[i].extra_param%>"<%}%>>
         <a href="<%=ads[i].curl%>" class="inner-item clr" target="_blank"
-           onclick="<%=ads[i].onclick%>'<%=ads[i].id%>');">
+           onclick="<%=ads[i].onclick%>">
             <div class="inner-item-pic-info" >
                 <div class="info-content">
                     <div class="text-content">
@@ -446,7 +512,7 @@ input:focus{outline-offset:-2px;}
         <%}else if(ads[i].type == 3) {%>
         <!--三图-->
         <div id="<%=ads[i].id%>" class="rec-item news-item tpl-3" style="position: relative;"  onclick="ThisPage.clickLog(this,<%=ads[i].stype%>)" <%if(ads[i].extra_param){%>extra_param="<%=ads[i].extra_param%>"<%}%>>
-        <a href="<%=ads[i].curl%>" class="inner-item" target="_blank"  onclick ="<%=ads[i].onclick%>'<%=ads[i].id%>');">
+        <a href="<%=ads[i].curl%>" class="inner-item" target="_blank"  onclick ="<%=ads[i].onclick%>">
             <div class="text-content">
                 <h2><%=ads[i].tit%><span class="hotRec hotRec-1"></span></h2>
             </div>
@@ -469,7 +535,7 @@ input:focus{outline-offset:-2px;}
         <%if (ads[i].tag_list || ads[i].phone_link || ads[i].aa_link){%>
         <%if (ads[i].phone_link) {%>
         <span class="aa-link-slow">
-                <a href="tel:<%=ads[i].phone_num%>" style="padding:0px;margin:0px;" class="aa-item" data-cal="tel:<%=ads[i].phone_num%>" data-rcv="<%=ads[i].phone_link%>" onclick="<%=ads[i].onclick%>'<%=ads[i].id%>');">
+                <a href="tel:<%=ads[i].phone_num%>" style="padding:0px;margin:0px;" class="aa-item" data-cal="tel:<%=ads[i].phone_num%>" data-rcv="<%=ads[i].phone_link%>" onclick="<%=ads[i].onclick%>">
                     <img class="slow_aa_iphone" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAPASURBVGhD7ZlXiFRJFIbHsEZWMWJasygm0BdFDIv6IoLgIuKbIIqIiuCDIiK+6YugKJhF0TUgrOlhXTHgqogPigETRswR45p11+9rpqCZvd3Ts9vdUwPzw4feuqfvPTVVdc6puiXVquKqUfpvlZTOT4Kr8DechT5QpfQj7IR/ynAfmkCVUCvwr6/jL2Ac1IOjpW0bIXp1gdugw5egMwR57y/w3mgbYlU7uAU6egySptB08P4DiHKKNYILoJOHoT4kyQAQ9RRbAzpnZxrbkEXpU2yUDTHpIxhicw2vs8CO3AUjXDT6BjpmdMpFNeE4+JvVNsSisMi7pa5yU3f4AI7kcBti0G6wIxNSV7lrDvi7A6mrCBTCakUj0WDwd+dTVxGoE7hO3kJFFu9ysCNrU1eRyOmhU9NSV+WrK3yCr9DLhlj0C9iRG/CDDeVoF2gfVdRShtRzoHMzbMiiYaDda2hpQ2wyU+vgY8i0VuzwadBurg2x6gjo5MrU1b/VBswf2oy1IVb1gPdgohthQ4Jmgh15Dj/ZEKtmg47egaQpZhW8D7Q5BQ0gStWCUEtttSFBVsmh9N8L/iZKmSdegY46QknqAE9Bmw0Q7WmLW1ozvklvpA0J6g+hwysg2s4sAJ18Bul7+HQNgneg3RIbYpR/4d9AJ10TzSFJjpgli3ZLIcqRMXKFhW2UypQsTaiGbu0sXaLsTAu4DjrpAUWm3eTP8Aa02wJ1IJusvIdCw9RVkWTyuwc6acitDUkaAB7uaXcIkg40BsKfoI1o7xFt0UbRLW4IueaYTPnDgwwTqnZXoDeo9rANrBy8Z5C4WPp/+QO0KYr6QQi5OyDT9PH41TUVHN4EYQ25iZsPoSrwaPYJeM+qegoUZXScGmH6/A6ZyhTX0irQTsxLJs/WUFZGxO0QbA9CRyi4nD6PwJd6zJrtcM9KeQ84muVJW7cSPtfA4a614KNjKRMOvs9AvjZaTeFXCKPj9sIIV1B5AH4ZfOFN6Av50hh4CD7bIFPwzji/T4IvdCGPh3zJk//94LMX2VBo1YV14AsNr77UrXE+NA98ruVP0eTi/Ay+2Mhjuf9/5PY6BJWifwEYAuHl5oXJ8F8ijznqBPgcw3ylqBmk5wWzdk/IVXY8RC4jo5GsUuXhX8jaX2A9tIVsshPhSNbEG82ncaPaMgh7Fj8uWXM5BctOOU86N4N2ljYWodHJPOB0CcFAXEuW/AthKoT67CVY4kctI5FF4zUIHUrHyjmfibUosjCcCIvBD7PmjIp83qhWtfKrkpLvQWkC5sBXTF0AAAAASUVORK5CYII=">
                     <span style="color: #999;font-size: 13px;">电话咨询</span>
                 </a>
@@ -477,7 +543,7 @@ input:focus{outline-offset:-2px;}
             <%}%>
             <%if (ads[i].aa_link) {%>
             <div class="aa-link-slow">
-                <a href="<%=ads[i].aa_link%>" target="_blank" class="aa-item" style="padding:0px;margin:0px;  display:flex;display: -webkit-flex;align-items:center;" onclick="<%=ads[i].onclick%>'<%=ads[i].id%>');">
+                <a href="<%=ads[i].aa_link%>" target="_blank" class="aa-item" style="padding:0px;margin:0px;  display:flex;display: -webkit-flex;align-items:center;" onclick="<%=ads[i].onclick%>">
                     <img class="slow_aa_iphone"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIvSURBVGhD7ZlNaxNhFIUjrvxAUVQQFPEDRPwJQkEQ1I0rsykRTGaSSQJBgop7QdwqSlEQV4oguHFTF+JOUfQfuBCEgiDW2lr8QKvPjWeYpE1BpeIt3AcOmffeOzPnTDIMZEpBEPwZ9Xp9FD1HXxuNxg9neo9uJUmyR3aHg/mr+U5sf0eTjjSTe0PTWZYdkO1BGBxVgBlUa7fba9VyQ5qmO/F4R2EmKpXKGrUKMP/UBkiaqOSScrm8Eq/PFKaqcgHNzzTmOp3OOpXcgtfTCnJJpQI1prR0DUHy22BMpYII8h+IIN6IIN6IIN6IIN6IIN6IIN6IIN6IIN6IIN6IIN74nSAftXQNAU4sGoTipDVrtdoOldyC1wsKclGlAhp31bypkkvwtxW9ldeDKhekabqfxqwNoAesT7I+NF/VanWzdllAkiT7hu2zRDqKr3PojUKM67QLwfxhhuwdhIVZTC80PkCz2dxL78u82X8iQjziom3UqYfD4CYGz6DbbNvPrV92kFmNDkDvivpP+uaXVBz7OjrG6Vb8OutfYiE4oF2V1Sr1aLVau+jZv/nv0HqV/ZIHwfgGlfL3FQ8V8KzKfuH+2WZmMf1BpR6sLyvEYwulsl8wfEpB7tu62+2uYvuGaq/5lrb3Bj1jb1Exaw/MOXQEVdBLhXiFdmvUL5gdQRNmGn1CU9q2EPf67xfXYHg6Ny59I8A4nyMaWR5gOsP0NT7PZ1l2nAffFrWCIFg2lEo/AZiqIAQZKaOlAAAAAElFTkSuQmCC">
                     <span style="color: #999;font-size: 13px;">在线咨询</span>
 
@@ -491,7 +557,7 @@ input:focus{outline-offset:-2px;}
         <%}else if(ads[i].type == 6) {%>
         <!--大图-->
         <div id="<%=ads[i].id%>" class="rec-item news-item tpl-3"  onclick="ThisPage.clickLog(this,<%=ads[i].stype%>)" <%if(ads[i].extra_param){%>extra_param="<%=ads[i].extra_param%>"<%}%>>
-        <a href="<%=ads[i].curl%>" class="inner-item" target="_blank"  onclick ="<%=ads[i].onclick%>'<%=ads[i].id%>');">
+        <a href="<%=ads[i].curl%>" class="inner-item" target="_blank"  onclick ="<%=ads[i].onclick%>">
             <div class="text-content">
                 <h2><%=ads[i].tit%><span class="hotRec hotRec-1"></span></h2>
             </div>
@@ -507,86 +573,6 @@ input:focus{outline-offset:-2px;}
                 <%if (ads[i].sign){%><span class="src-sign" style="">广告</span><%}%>
             </div>
         </a>
-        </div>
-        <%}else if(ads[i].type == 8) {%>
-        <!--三图下载-->
-        <div id="<%=ads[i].id%>" class="rec-item news-item" style="position: relative;">
-            <a href="<%=ads[i].jump_url%>" class="inner-item" style="padding-bottom: 0px;"
-            target="_blank" data-download_click_url="<%=ads[i].download_click_url%>"
-            onclick="<%=ads[i].onclick%>'<%=ads[i].id%>');"> <!--href jumpurl 只android，ios为downurl-->
-                <div class="text-content">
-                    <h2> <!--h2 title-->
-                        <%=ads[i].tit%>
-                    <span class="hotRec hotRec-1"></span>
-                    </h2>
-                </div>
-                <div class="pic-content"> <!--h2 picurl_list-->
-                    <div class="img-wrap"><img src="<%=ads[i].image_url_list[0]%>"></div>
-                    <div class="img-wrap"><img src="<%=ads[i].image_url_list[1]%>"></div>
-                    <div class="img-wrap"><img src="<%=ads[i].image_url_list[2]%>"></div>
-                </div>
-            </a>
-            <div style="display: flex;margin: 0 11px;">
-                <a href="<%=ads[i].jump_url%>" class="down_load_desc_href"
-                data-download_click_url="<%=ads[i].download_click_url%>"
-                onclick="<%=ads[i].onclick%>'<%=ads[i].id%>');">
-                    <!-- desc , jumpurl-->
-                    <div class="down_load_desc"><%=ads[i].desc%></div>
-                </a>
-                <a href="<%=ads[i].download_url%>" class="down_load_button_href"
-                data-download_click_url="<%=ads[i].download_click_url%>"
-                onclick="<%=ads[i].onDownloadButtonclick%>'<%=ads[i].id%>');">
-                    <!-- 立即下载 , downloadurl-->
-                    <div class="down_load_button">立即下载</div>
-                </a>
-            </div>
-            <a href="<%=ads[i].jump_url%>" style="padding: 0px 0px 14px 0px;"
-            data-download_click_url="<%=ads[i].download_click_url%>"
-            onclick="<%=ads[i].onclick%>'<%=ads[i].id%>');"><!-- desc , jumpurl-->
-            <div>
-                <span class="src-net" style="color: #999;font-size: 13px;"><%=ads[i].name%></span><!-- desc , name-->
-                <span class="src-sign" style="color: #999;font-size: 13px;">广告</span>
-            </div>
-            </a>
-        </div>
-        <%}else if(ads[i].type == 7) {%>
-        <!--大图下载-->
-        <div id="<%=ads[i].id%>" class="rec-item news-item" style="position: relative;" >
-            <a href="<%=ads[i].jump_url%>" class="inner-item" style="padding-bottom: 0px;"
-            target="_blank" data-download_click_url="<%=ads[i].download_click_url%>"
-            onclick="<%=ads[i].onclick%>'<%=ads[i].id%>');"> <!--href jumpurl 只android，ios为downurl-->
-                <div class="text-content">
-                    <h2> <!--h2 title-->
-                        <%=ads[i].tit%>
-                    <span class="hotRec hotRec-1"></span>
-                    </h2>
-                </div>
-                <div class="pic-content"> <!--h2 picurl_list-->
-                    <div class="big_pic_box"><img src="<%=ads[i].image_url_list[0]%>"></div>
-                </div>
-            </a>
-            <div style="display: flex;margin: 0 11px;">
-                <a href="<%=ads[i].jump_url%>" class="down_load_desc_href"
-                data-download_click_url="<%=ads[i].download_click_url%>"
-                onclick="<%=ads[i].onclick%>'<%=ads[i].id%>');">
-                    <!-- desc , jumpurl-->
-                    <div class="down_load_desc"><%=ads[i].desc%></div>
-                </a>
-                <a href="<%=ads[i].download_url%>" class="down_load_button_href"
-                data-download_click_url="<%=ads[i].download_click_url%>"
-                onclick="<%=ads[i].onDownloadButtonclick%>'<%=ads[i].id%>');">
-                    <!-- 立即下载 , downloadurl-->
-                    <div class="down_load_button">立即下载</div>
-                </a>
-            </div>
-            <a href="<%=ads[i].jump_url%>" style="padding: 0px 0px 14px 0px;"
-            data-download_click_url="<%=ads[i].download_click_url%>"
-            onclick="<%=ads[i].onclick%>'<%=ads[i].id%>');"><!-- desc , jumpurl-->
-            <div>
-                <span class="src-net" style="color: #999;font-size: 13px;"><%=ads[i].name%></span><!-- desc , name-->
-                <span class="src-sign" style="color: #999;font-size: 13px;">广告</span>
-            </div>
-            </a>
         </div>
         <%}%>
         <%}%>
@@ -789,6 +775,8 @@ input:focus{outline-offset:-2px;}
 <div class="top_ads_singn_desc">以下是百度为您推荐的广告</div>
 <div id="tab-asp-content" class="tab-news-content water-container tab-asp-content">
 </div>
+<div id="tab-interest-content">
+</div>
 <div id="tab-afd-content" class="tab-news-content water-container tab-asp-content">
     <div class="gexing_tips" id="gexing_tips_word" style="padding: 0px;display:none;font-size: 14px;color: gray;text-align: center;">为您推荐的精彩内容</div>
 </div>
@@ -869,7 +857,8 @@ window["mid_page_param"] = {
         "lukid":"$lukid$",
         "t":"$t$",
         "is_allow_afd":"$is_allow_afd$",
-        mscf:"$mscf$"
+        mscf:"$mscf$",
+        "is_exp_interest":$is_exp_interest$ // 是否曝光兴趣推词８奈笛榭乜刂 TODO
 
 };
 </script>
@@ -882,6 +871,9 @@ ThisPage={
         block_asp_num:10,
         enable_indert_asp:true,
         sortId:0,
+        interest_exp_layer:[$interest_exp_layer$], // 兴趣推词展现在第几条feed广告后
+        interest_already_exp_layer:{}, // 兴趣推词已经展现在第几条feed广告后
+        interest_num:0, //兴趣推词的id编号，用于排序，曝光
         newsDataPool:[],
         aspDataPool:[],
         curReqAspOrder:1,
@@ -892,7 +884,6 @@ ThisPage={
         },
         
         limit_asp_area_num: 10,
-        limit_afd_area_num: 0,
         asp_area_num: 0,
         has_render_query_relate : false, 
         has_send_query_relate: false,
@@ -925,8 +916,6 @@ ThisPage={
         alsExposureAnchor:[], //{domId:domId, y:坐标, extra_param:xxx}
         //stype=1:beidou stype=2:news stype=3: 内容区广告
         transAspData: function(ads, stype){
-            // type = 1 无图, 2 feed单图,3 feed三图, 4 feed video, 6 feed 大图, 7 大图下载,
-            // 8 三图下载
             //console.log('transAspData:' + stype);
             //console.log(ads);
             var newads =[];
@@ -1029,33 +1018,14 @@ ThisPage={
                             obj.type = 6;
                             obj.image_url = afd_info.img_list[0];
                         }else{
-                            if (afd_info.mts_list.length > 0) {
-                                if (-1 != afd_info.mts_list.indexOf("16513")) { // app大图下载
-                                    obj.type = 7;
-                                } else if (-1 != afd_info.mts_list.indexOf("16511")) { // app三图下载
-                                    obj.type = 8;
-                                }
-                            } else {
-                                console.log("freedom feed ad_type[" + ad_style + "] error!!!");
-                                continue;
-                            }
+                            console.log("freedom feed ad_type[" + ad_style + "] error!!!");
+                            continue;
                         }
                         obj.image_url_list = afd_info.img_list;
                         obj.surl = afd_info.user_name;
                         obj.uicon = afd_info.user_icon;
                         obj.extra_param = afd_info.extra_param;
 
-                        if ( 7 == obj.type || 8 == obj.type) {
-                            obj.name = afd_info.name;
-                            obj.app_name = afd_info.app_name;
-                            obj.jump_url = afd_info.jump_url; // 点图文跳转url
-                            obj.download_url = afd_info.download_url; // 点击下载按钮跳转url
-                            var u = navigator.userAgent;
-                            var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
-                            if (isIOS) { // ios点击图文仍旧跳转到appstore
-                                obj.jump_url = obj.download_url;
-                            }
-                        }
                     }
                 } else if(stype ==1  && ads[i].w_picurl && ads[i].w_picurl.length > 0){
                         obj.type = 2;
@@ -1139,22 +1109,10 @@ ThisPage={
                         obj.tit = midpage_mob_common.Utility.newHighLightTwo(obj.tit, ads[i].bid, "#CC0000");
                     }
                 }
-                if (obj.extra_param){ // da_area = link
-                    obj.onclick ="ThisPage.sendAlsClicklog(\'" + obj.extra_param + "\',null,"
+                if (obj.extra_param){
+                    obj.onclick ="ThisPage.sendAlsClicklog(\'" + obj.extra_param + "\');"
                 }else {
                     obj.onclick ="";
-                }
-                if ( 7 == obj.type || 8 == obj.type) { // onscroll 曝光
-                    obj.onDownloadButtonclick = "ThisPage.sendAlsClicklog(\'" + obj.extra_param +
-                        "\', \'downloadbtn\',";
-                    obj.download_click_url = obj.curl;
-                    // obj.onScroll没有加上id，需要在模板中拼接上
-                    if (obj.extra_param){ // da_area = hotarea
-                        obj.onclick = "ThisPage.sendAlsClicklog(\'" + obj.extra_param +
-                        "\', \'hotarea\',";
-                    }else {
-                        obj.onclick ="";
-                    }
                 }
                 newads.push(obj);
             }
@@ -1181,10 +1139,8 @@ ThisPage={
             if(ThisPage.expList["allow_afd"] && !ThisPage.expList["noly_allow_asp"] ){ //asp区请求feed广告实验
                 if(ThisPage.expList["add_feed_ads_1"]){
                     ASP.reqAsp(ThisPage.query,1,false,"afd")
-                    ThisPage.limit_afd_area_num = 1;
                 }else{
                     ASP.reqAsp(ThisPage.query,2,false,"afd")
-                    ThisPage.limit_afd_area_num = 2;
                 }
 //                if(ThisPage.mscf == 153){ //153再请求一条个性化
 //                    ASP.reqAsp(ThisPage.query,1,false,"afd_gexing")
@@ -1208,6 +1164,107 @@ ThisPage={
             }
             
         },
+        transInterestData: function(ads){
+           if (!ads) {
+               return
+           }
+           if (ads.length == 0) {
+               return []
+           }
+           var arrEntities={'lt':'<','gt':'>','nbsp':' ','amp':'&','quot':'"'};
+           var result = [];
+           for (var i=0; i<ads.length;)
+           {
+               var obj = {};
+               if (i+1<ads.length) {
+                   obj.key1 = ads[i]['key'];
+                   obj.curl1 = ads[i]['curl'].replace(/&(lt|gt|nbsp|amp|quot);/ig,function(all,t){return arrEntities[t];}) + '&mscf=$mscf$';
+                   obj.num1 = i;
+                   obj.key2 = ads[i+1]['key'];
+                   obj.curl2 = ads[i+1]['curl'].replace(/&(lt|gt|nbsp|amp|quot);/ig,function(all,t){return arrEntities[t];}) + '&mscf=$mscf$';
+                   obj.num2 =i+1;
+                   result.push(obj);
+                   i=i+2;
+               } else {
+                   break;
+               }
+           }
+           return result;
+        },
+        get_render_interest: function(){
+            
+            var interest_list = [{"key":"$keyword2$","curl":"$bdInterestLulink2$"},{"key":"$keyword3$","curl":"$bdInterestLulink3$"},{"key":"$keyword4$","curl":"$bdInterestLulink4$"},{"key":"$keyword5$","curl":"$bdInterestLulink5$"},{"key":"$keyword6$","curl":"$bdInterestLulink6$"},{"key":"$keyword1$","curl":"$bdInterestLulink1$"}];//存放interest recommendation
+            var temp = document.createElement("div");
+            interest_list =  interest_list.filter(function(m){if(m.key){return m;}});
+            if(interest_list.length <=1){
+                return temp;
+            }
+            temp.setAttribute('id','tab-interest-'+ThisPage.interest_num);
+            temp.setAttribute('class','tab-interest-content');
+            temp.setAttribute('data-sendlog','false');
+            temp.innerHTML = ThisPage.T('interest-list_template',{'ads': this.transInterestData(interest_list)});
+            ThisPage.interest_num += 1;
+            return temp;
+        },
+        render_interest: function() {
+            if (window["mid_page_param"].is_exp_interest &&
+                0 < ThisPage.interest_exp_layer.length &&
+                Object.keys(ThisPage.interest_already_exp_layer).length < ThisPage.interest_exp_layer.length ) {
+                var base_afd_len = 0;
+                if(ThisPage.expList["allow_afd"] &&
+                   !ThisPage.expList["noly_allow_asp"] ){
+                    //asp区请求feed广告实验
+                    if(ThisPage.expList["add_feed_ads_1"]){
+                        base_afd_len = 1;
+                    }else{
+                        base_afd_len = 2;
+                    }
+                }
+
+                var tab_afd_content_node = document.getElementById('tab-afd-content');
+                var tab_feed_content_node = document.getElementById('tab-feed-content');
+                var afd_nodes = tab_afd_content_node.getElementsByClassName('news-item');
+                var afd_nodes_len = afd_nodes.length;
+                var feed_nodes = tab_feed_content_node.getElementsByClassName('news-item');
+                var feed_nodes_len = feed_nodes.length;
+
+                var sorted_interest_exp_layer = ThisPage.interest_exp_layer.sort(function(a,b) {return a - b});
+                for(var i in sorted_interest_exp_layer) {
+                    var temp_num = sorted_interest_exp_layer[i];
+                    if(temp_num <= afd_nodes_len)
+                    {
+                        if (undefined == ThisPage.interest_already_exp_layer[temp_num]) {
+                            // insert
+                            var insert_interest_node = this.get_render_interest();
+                            tab_afd_content_node.getElementsByClassName('news-list-wrapper')[0].insertBefore(insert_interest_node, afd_nodes[temp_num]);
+                            ThisPage.interest_already_exp_layer[temp_num] = 1;
+                        }
+                    } else {
+                        break;
+                    }
+                }
+                for(var i in sorted_interest_exp_layer) {
+                    var temp_num = sorted_interest_exp_layer[i] - base_afd_len;
+                    if (temp_num < 0)
+                        continue;
+                    if(temp_num <= feed_nodes_len) {
+                        if (undefined == ThisPage.interest_already_exp_layer[temp_num + base_afd_len]) {
+                            // insert
+                            var insert_interest_node = this.get_render_interest();
+                            tab_feed_content_node.getElementsByClassName('news-list-wrapper')[0].insertBefore(insert_interest_node, feed_nodes[temp_num]);
+                            ThisPage.interest_already_exp_layer[temp_num + base_afd_len] = 1;
+                        }
+                    } else {
+                        break;
+                    }
+                }
+                // 飘红实验
+                if(window.mid_page_param.mscf == 577){
+                    $('.interest .interest-recommend:nth-of-type(2) a').addClass('red');
+                }
+            }
+        },
+
         ini: function(){
             console.log("ThisPage ini")
             midpage_mob_common.MonitorObject.start();
@@ -1350,6 +1407,7 @@ ThisPage={
                 }
             }
 
+            this.render_interest(); 
         },
         renderASPInsert: function(ads){
             ThisPage.reqNextAsping = false;
@@ -1434,10 +1492,15 @@ ThisPage={
         renderMerge: function(){
             //console.log('renderMerge:newsDataPool.length=' + ThisPage.newsDataPool.length);
             if(ThisPage.conf.showNewsAreaOnlyAsp){
+                var is_insert_asp = false;
                 while(newad = ThisPage.aspDataPool.shift()){
                     newad.id = "asp_sortId_" + ThisPage.sortId;
                     ThisPage.appendItem(newad);
                     ASP.addAntiChect(newad.mid,'#tab-feed-content', newad.id);
+                    is_insert_asp = true;
+                }
+                if (is_insert_asp) {
+                    this.render_interest();
                 }
                 return;
             }
@@ -1490,30 +1553,10 @@ ThisPage={
             
         },
         
-        sendAlslog: function(da_type, extra_param, da_area_arg, domId){
+        sendAlslog: function(da_type, extra_param){
             if(!extra_param || !extra_param.length){
                 return;
             }
-
-            var da_locate = 1;
-            var da_page_num = 1;
-            if (undefined != domId && null != domId) {
-                if (-1 != domId.indexOf('search_afd_')) { // tab-afd-content
-                    da_locate += Number(domId.split('_')[2]) + ThisPage.limit_asp_area_num;
-                } else if (-1 != domId.indexOf('asp_sortId_')) { // tab-feed-content
-                    da_locate += Number(domId.split('_')[2]) + ThisPage.limit_asp_area_num +
-                        ThisPage.limit_afd_area_num;
-                } else if (-1 != domId.indexOf('search_asp_')) { // tab-asp-content
-                    da_locate += Number(domId.split('_')[2]);
-                }
-                var targetEle = document.getElementById(domId);
-                if (null != targetEle) {
-                    var targetTop =  midpage_mob_common.Utility.getElementOffset(targetEle).top;
-                    var cHeight = midpage_mob_common.Utility.getClientHeight();
-                    da_page_num = Math.floor(targetTop/cHeight) + 1;
-                }
-            }
-
             if(extra_param.match(/toeclicklog/g) != null && da_type == 3){ //asp打点修改src
                 var als_get = "https://eclick.baidu.com/m.js?";
                 var _asplog = "et=makepot&jk=$bdTpclickedJk$&temp=$t$&mscf=$mscf$&start_time="+new Date().getTime() + extra_param +"&random="+ Math.random()+ "&is_app=" + "$is_app$" +"&lukid=" + "$lukid$";
@@ -1530,17 +1573,6 @@ ThisPage={
                 var net_type = '$net_type$';
                 var cuid="$cuid$";
 
-                var da_area = "link";
-                if (undefined != da_area_arg && null != da_area_arg) {
-                    if ("downloadbtn" == da_area_arg) {
-                        da_area = "downbtn";
-                        da_type = 2;
-                    } else if ("hotarea" == da_area_arg) {
-                        da_area = "hotarea";
-                        da_type = 2;
-                    }
-                }
-
                 var baiduId = ""
                 var reg = /BAIDUID=\w+\:\w+=\d+/g;
                 var cookies = document.cookie.match(reg)
@@ -1554,23 +1586,19 @@ ThisPage={
                 var da_page = "HCFRS";
                 var origin_time = (new Date()).getTime();
 
-                var _log = "productId="+ productId +"&logid="+Math.random()+"&da_type=" + da_type +
-                    "&_client_type=" + _client_type + "&_os_type=" + _os_type +  "&net_type=" +
-                    net_type +  "&cuid=" + cuid +  "&baiduId=" + baiduId + "&da_page=" + da_page +
-                    "&da_page_num=" + da_page_num + "&da_locate=" + da_locate + "&origin_time=" + origin_time + "&da_area="
-                    + da_area + "&ext_info="+ encodeURIComponent(extra_param) + "&random="+ Math.random()
+                var _log = "productId="+ productId +"&logid="+Math.random()+"&da_type=" + da_type + "&_client_type=" + _client_type + "&_os_type=" + _os_type +  "&net_type=" + net_type +  "&cuid=" + cuid +  "&baiduId=" + baiduId + "&da_page=" + da_page + "&da_page_num=1" + "&da_locate=1" + "&origin_time=" + origin_time + "&da_area=link" + "&ext_info="+ encodeURIComponent(extra_param) + "&random="+ Math.random()
                 var image = document.createElement("img");
                 image.src = als_get + _log;
             }
 
         },
         
-        sendAlsClicklog: function(extra_param, da_area_arg, domId){
-            ThisPage.sendAlslog(2, extra_param, da_area_arg, domId);
+        sendAlsClicklog: function(extra_param){
+            ThisPage.sendAlslog(2, extra_param);
         },
-
-        sendAlsExposureLog: function(extra_param, da_area_arg, domId){
-            ThisPage.sendAlslog(3, extra_param, da_area_arg, domId);
+        
+        sendAlsExposureLog: function(extra_param){
+            ThisPage.sendAlslog(3, extra_param);
         },
         //afd返回的有extra_param
         addAlsExposureAnchor: function(domId, extra_param){
@@ -1584,7 +1612,7 @@ ThisPage={
             var cHeight = midpage_mob_common.Utility.getClientHeight();
             
             if ((sTop + cHeight) > targetTop) {
-                ThisPage.sendAlsExposureLog(extra_param, null, domId);
+                ThisPage.sendAlsExposureLog(extra_param);
             }else {
                 var anchor = {"domId": domId, "y": targetTop, "extra_param":extra_param};
                 ThisPage.alsExposureAnchor.push(anchor);
@@ -1598,8 +1626,7 @@ ThisPage={
             var temp = [];
             for(a in ThisPage.alsExposureAnchor){
                 if ((sTop + cHeight) > ThisPage.alsExposureAnchor[a].y){
-                    ThisPage.sendAlsExposureLog(ThisPage.alsExposureAnchor[a].extra_param, null,
-                            ThisPage.alsExposureAnchor[a].domId);
+                    ThisPage.sendAlsExposureLog(ThisPage.alsExposureAnchor[a].extra_param);
                 } else {
                     temp.push(ThisPage.alsExposureAnchor[a]);
                 }
@@ -1793,16 +1820,12 @@ ThisPage={
             var ios = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/) ? 1 :0;
             var _pid = null;
             if(_isapp && ios){
-                // 汇川中间页_APP_iOS_列表页_feed
                 _pid = x =="search"  ? "1505368534182" : "1498819769061"
             }else if(_isapp && ios===0){
-                // 汇川中间页_APP_Android_列表页_feed
                 _pid = x =="search"  ? "1505368453865" : "1498819694173"
             }else if(_isapp==false && ios){
-                // 汇川中间页_WAP_iOS_列表页_feed
                 _pid = x =="search"  ? "1505368693013" : "1498819635307"
             }else if(_isapp==false && ios ===0){
-                // 汇川中间页_WAP_Android_列表页_feed
                 _pid = x =="search"  ? "1505368621478" : "1498819561331"
             }else {
                 _pid = 0;
@@ -2647,18 +2670,13 @@ var ASP={
                         var aDomCurrent = aDom[j];
 
                         if ( (aDomCurrent.tagName === 'A'
-                                && aDomCurrent.href !== undefined
+                                && aDomCurrent.href !== ''
                                 && aDomCurrent.href.indexOf('baidu') !== -1
                                 ) ||
                                 (
                                 aDomCurrent.tagName === 'A'
-                                && aDomCurrent.dataset.rcv !== undefined
+                                && aDomCurrent.dataset.rcv !== ''
                                 && aDomCurrent.dataset.rcv.indexOf('baidu') !== -1
-                                ) ||
-                                (
-                                aDomCurrent.tagName === 'A'
-                                && aDomCurrent.dataset.download_click_url !== undefined
-                                && aDomCurrent.dataset.download_click_url.indexOf('baidu') !== -1
                                 )
                         ) {
                             /* 添加初始化ck */
@@ -2699,17 +2717,8 @@ var ASP={
                         window.location.href = aDom.dataset.cal;
                         aDom.href = "javascript:;";
                     }
-                }else if(aDom.href !== undefined
-                         && aDom.href.indexOf('baidu') !== -1) {
+                }else{
                     aDom.href = addCkOnUrl(aDom.href, imTimeSign, isInit);
-                }
-                if(aDom.dataset.download_click_url != undefined){
-                    var clickUrl=  addCkOnUrl(aDom.dataset.download_click_url, imTimeSign, isInit);
-                    aDom.dataset.download_click_url = clickUrl;
-                    if(isInit == 'click'){
-                        var image = document.createElement('img');
-                        image.src = clickUrl;
-                    }
                 }
             }
 
@@ -2806,7 +2815,45 @@ $midpage_mob_common.MonitorObject$
 </script>
 <script type="text/javascript">
 ThisPage.run();
+
+//点击log
+$('body').on('click','.tab-interest-content .interest-src-net',function(e){
+    var pageNum = Math.ceil($(this).offset().top/innerHeight);
+    var sendlogUrl = "https://eclick.baidu.com/m.js?interest_click=true&interest_query="+$(this).data('num')+"&interest_word="+$(this).data('word')+"&pagenum="+pageNum+"&mscf=$mscf$&time="+Date.now();
+    var sendLogImg = document.createElement('img');
+    sendLogImg.src = sendlogUrl;
+})
+//函数截流
+function throttle(fn,delay){
+    var _self = fn,timer,firstTime=true;
+    return function(){
+        var args =arguments,
+            _me  = this;
+        if(firstTime){
+            _self.apply(_me,args);
+            return firstTime = false;
+        }
+        if(timer){
+            return false;
+        }
+        timer = setTimeout(function(){
+            clearTimeout(timer);
+            timer = null;
+            _self.apply(_me,args);
+        },delay||500);//默认500毫秒延迟
+    }
+}
+//曝光log
+$(window).on('scroll',throttle(function(){
+    $('.tab-interest-content').each(function(){
+        if($(this).data('sendlog') == false && $(this).offset().top > $(window).scrollTop()){
+            $(this).data('sendlog','true');
+            var interest_log = "https://eclick.baidu.com/m.js?interest_exposure=true&interest_top="+Math.ceil($(this).offset().top)+"&mscf=$mscf$&time="+Date.now();
+            var sendLogImg = document.createElement('img');
+            sendLogImg.src = interest_log;
+        }
+    });
+}))
+
 </script>
 </body>
-
-
