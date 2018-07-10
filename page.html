@@ -1192,13 +1192,8 @@ ThisPage={
            return result;
         },
         get_render_interest: function(){
-            
-            var interest_list = [{"key":"$keyword2$","curl":"$bdInterestLulink2$"},{"key":"$keyword3$","curl":"$bdInterestLulink3$"},{"key":"$keyword4$","curl":"$bdInterestLulink4$"},{"key":"$keyword5$","curl":"$bdInterestLulink5$"},{"key":"$keyword6$","curl":"$bdInterestLulink6$"},{"key":"$keyword1$","curl":"$bdInterestLulink1$"}];//存放interest recommendation
+            var interest_list = [{"key":"$keyword2$","curl":"$bdInterestLulink2$"},{"key":"$keyword3$","curl":"$bdInterestLulink3$"},{"key":"$keyword4$","curl":"$bdInterestLulink4$"},{"key":"$keyword5$","curl":"$bdInterestLulink5$"},{"key":"$keyword6$","curl":"$bdInterestLulink6$"},{"key":"$keyword1$","curl":"$bdInterestLulink1$"}]//存放interest recommendation
             var temp = document.createElement("div");
-            interest_list =  interest_list.filter(function(m){if(m.key){return m;}});
-            if(interest_list.length <=1){
-                return temp;
-            }
             temp.setAttribute('id','tab-interest-'+ThisPage.interest_num);
             temp.setAttribute('class','tab-interest-content');
             temp.setAttribute('data-sendlog','false');
